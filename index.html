@@ -456,7 +456,12 @@ async function loadLB() {
 }
 
 async function saveScore(u, sc) {
-  try { await db.from('scores_2048').insert({ user_id:u.id, username:u.username, score:sc }); } catch {}
+  try {
+    await db.from('scores_2048').upsert(
+      { user_id:u.id, username:u.username, score:sc },
+      { onConflict: 'user_id', ignoreDuplicates: false }
+    );
+  } catch {}
   loadLB();
   const sb = await getPersonalBest(u.id);
   document.getElementById('pBest').textContent = Math.max(sb, hiScore);
