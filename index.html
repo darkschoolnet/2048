@@ -204,11 +204,24 @@ html, body { height: 100%; max-height: 100dvh; overflow: hidden; }
 .ov-title { font-family:'Cormorant Garamond',serif; font-size:42px; font-weight:300; letter-spacing:-1px; }
 .ov-sub   { color:#484860; font-size:11px; letter-spacing:2px; text-transform:uppercase; }
 
-#goPromo { display:none; flex-direction:column; align-items:center; gap:3px; padding:10px 20px; background:linear-gradient(135deg,rgba(91,140,255,.08),rgba(91,140,255,.03)); border:1px solid rgba(91,140,255,.2); border-radius:var(--radius); cursor:pointer; text-align:center; transition:border-color .2s; }
-#goPromo:hover { border-color:rgba(91,140,255,.5); }
-#goPromo.visible { display:flex; }
-.go-promo-t { font-family:'Barlow Condensed',sans-serif; font-size:13px; color:#5b8cff; letter-spacing:2px; text-transform:uppercase; }
-.go-promo-b { font-family:'Barlow Condensed',sans-serif; font-size:9px; color:#444; letter-spacing:1.5px; text-transform:uppercase; }
+#goPromo {
+  display: none; flex-direction: column; align-items: stretch; gap: 6px;
+  padding: 14px 20px; width: 220px;
+  background: #0d0d14; border: 1px solid rgba(91,140,255,.25);
+  border-radius: var(--radius); cursor: pointer; text-align: center;
+  transition: border-color .2s, box-shadow .2s;
+}
+#goPromo:hover { border-color: rgba(91,140,255,.5); box-shadow: 0 0 24px rgba(91,140,255,.1); }
+#goPromo.visible { display: flex; }
+.go-promo-t { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; color: #666; letter-spacing: 2px; text-transform: uppercase; }
+.go-promo-b {
+  font-family: Impact, sans-serif; font-size: 13px; letter-spacing: 2.5px;
+  text-transform: uppercase; color: #fff;
+  background: #5b8cff; border-radius: 4px; padding: 8px 0;
+  animation: ctaPulse 2.5s ease-in-out infinite;
+  transition: background .2s;
+}
+#goPromo:hover .go-promo-b { background: #7aa3ff; animation: none; }
 
 /* History */
 .history { width:var(--board); position:relative; z-index:1; }
@@ -224,17 +237,38 @@ html, body { height: 100%; max-height: 100dvh; overflow: hidden; }
 .h-score.high-lbl { color:#8a6020; }
 
 /* Login promo banner */
-#loginPromo { display:none; width:var(--board); align-items:center; gap:12px; padding:10px 16px; background:linear-gradient(135deg,rgba(91,140,255,.06),rgba(91,140,255,.02)); border:1px solid rgba(91,140,255,.15); border-radius:var(--radius); cursor:pointer; position:relative; z-index:1; overflow:hidden; transition:border-color .2s; }
-#loginPromo:hover { border-color:rgba(91,140,255,.4); }
-#loginPromo:hover .promo-arrow { transform:translateX(4px); }
-#loginPromo.visible { display:flex; }
-#loginPromo::before { content:''; position:absolute; inset:0; background:linear-gradient(90deg,transparent 0%,rgba(91,140,255,.05) 50%,transparent 100%); background-size:200% 100%; animation:shimmer 2.5s infinite; }
-@keyframes shimmer { 0% { background-position:-200% 0; } 100% { background-position:200% 0; } }
-.promo-icon { font-size:22px; z-index:1; }
-.promo-text { flex:1; z-index:1; }
-.promo-head { font-family:'Barlow Condensed',sans-serif; font-size:11px; color:#5b8cff; letter-spacing:2px; text-transform:uppercase; }
-.promo-sub  { font-family:'Barlow Condensed',sans-serif; font-size:9px; color:#404040; letter-spacing:1px; margin-top:2px; }
-.promo-arrow { font-size:18px; color:#3a3a50; z-index:1; transition:transform .2s; }
+#loginPromo {
+  display: none; width: var(--board);
+  flex-direction: column; gap: 10px; padding: 14px 16px;
+  background: #0d0d12; border: 1px solid rgba(91,140,255,.22);
+  border-radius: var(--radius); position: relative; z-index: 1; overflow: hidden;
+  transition: border-color .2s, box-shadow .2s;
+}
+#loginPromo:hover { border-color: rgba(91,140,255,.5); box-shadow: 0 0 28px rgba(91,140,255,.08); }
+#loginPromo.visible { display: flex; }
+#loginPromo::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(91,140,255,.05), transparent);
+  background-size: 200% 100%; animation: shimmer 2.8s infinite;
+}
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.promo-top  { display: flex; align-items: center; gap: 10px; z-index: 1; }
+.promo-icon { font-size: 20px; }
+.promo-text { flex: 1; }
+.promo-head { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; color: #e8e8e8; letter-spacing: 1px; text-transform: uppercase; line-height: 1.2; }
+.promo-sub  { font-family: 'Barlow', sans-serif; font-size: 10px; color: #555; margin-top: 2px; }
+.promo-cta {
+  z-index: 1; font-family: Impact, sans-serif; font-size: 12px; letter-spacing: 3px;
+  text-transform: uppercase; cursor: pointer; padding: 9px 0;
+  background: #5b8cff; border: none; color: #fff; border-radius: 5px; width: 100%;
+  transition: background .2s, box-shadow .2s;
+  animation: ctaPulse 2.5s ease-in-out infinite;
+}
+.promo-cta:hover { background: #7aa3ff; box-shadow: 0 0 20px rgba(91,140,255,.4); animation: none; }
+@keyframes ctaPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(91,140,255,0); }
+  50%     { box-shadow: 0 0 0 5px rgba(91,140,255,.2); }
+}
 
 /* Footer */
 .footer { display:flex; align-items:center; justify-content:space-between; width:var(--board); position:relative; z-index:1; }
@@ -333,21 +367,23 @@ html, body { height: 100%; max-height: 100dvh; overflow: hidden; }
         <div class="ov-title" id="ovTitle">—</div>
         <div class="ov-sub"   id="ovSub">—</div>
         <div id="goPromo" onclick="togglePanel()">
-          <div class="go-promo-t">🏆 Score sichern</div>
-          <div class="go-promo-b">Einloggen → Highscore speichern</div>
+          <div class="go-promo-t">🏆 Score geht verloren</div>
+          <div class="go-promo-b">Jetzt einloggen</div>
         </div>
         <button class="btn btn-big" onclick="init()">Nochmal spielen</button>
       </div>
     </div>
 
     <!-- Login promo banner -->
-    <div id="loginPromo" onclick="togglePanel()">
-      <div class="promo-icon">🏆</div>
-      <div class="promo-text">
-        <div class="promo-head">Highscore speichern</div>
-        <div class="promo-sub">Meld dich an — bleib in der Rangliste</div>
+    <div id="loginPromo">
+      <div class="promo-top">
+        <div class="promo-icon">🏆</div>
+        <div class="promo-text">
+          <div class="promo-head">Dein Score verschwindet</div>
+          <div class="promo-sub">Einloggen → dauerhaft in der Rangliste bleiben</div>
+        </div>
       </div>
-      <div class="promo-arrow">›</div>
+      <button class="promo-cta" onclick="togglePanel()">Jetzt einloggen</button>
     </div>
 
     <div class="history">
